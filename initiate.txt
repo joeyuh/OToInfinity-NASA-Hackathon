@@ -3,7 +3,7 @@ ssh featurize@workspace.featurize.cn -p 28095
 
 scp -r /Users/donglianghan/Desktop/seq2seq  compute@192.168.100.21:~/
 
-
+ 
 conda activate tf_gpu_1.4.1
 cd work/NASA/seq2seq
 
