@@ -1,3 +1,6 @@
+from operator import truediv
+import re
+
 class Filter:
     def __init__(self,string):
         self.string = string
@@ -11,11 +14,19 @@ class Filter:
                 res += str+" "
         return res
 
-    def filter_for_a(self):
+    def filter_for_comma(self):
         str_list = self.string.split(',')
         res = ''
         for str in str_list:
             res += str+' '
         return res
+
+    def filter_for_space(self):
+        string = re.sub('[ ]','',self.string)
+        if not string:
+            return True
+        return False
+
+        
 
 

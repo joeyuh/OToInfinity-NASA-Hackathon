@@ -8,7 +8,7 @@ for filename in os.listdir(rootdir):
         with open(rootdir+filename, 'r') as f:
             string += f.read()
         flt = Filter(string)
-        res = flt.filter_for_a()
+        res = flt.filter_for_comma()
 
         with open(rootdir+filename, 'w') as f:
             f.write(res)
