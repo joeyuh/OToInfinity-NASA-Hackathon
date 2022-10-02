@@ -1,3 +1,3 @@
 # OToInfinity
-NASA Hackathon
-\n Sarah Wilson, Lianghan Dong, Hanjiang Yu
+NASA Hackathon <br />
+Sarah Wilson, Lianghan Dong, Hanjiang Yu
