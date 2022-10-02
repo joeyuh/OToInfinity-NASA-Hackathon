@@ -1,4 +1,3 @@
- 
 from io import StringIO
 from io import open
 from operator import contains
@@ -8,7 +7,10 @@ from pdfminer.pdfinterp import PDFResourceManager, process_pdf
 import time
 import os
 
-#process pdf
+from filter import Filter
+
+
+# process pdf
 def read_pdf(pdf):
     # resource manager
     rsrcmgr = PDFResourceManager()
@@ -23,54 +25,55 @@ def read_pdf(pdf):
     # get lines
     lines = str(content).split("\n")
     return lines
- 
-#get key parts
+
+
+# get key parts
 def key_parts(path):
     list_of_content = []
     list_of_keys = []
     try:
         with open(path, "rb") as my_pdf:
             list_of_content = read_pdf(my_pdf)
-            #print(len(list_of_content))
+            # print(len(list_of_content))
 
-            
-            for i in range(50,len(list_of_content)-200):
-                if(len(list_of_content[i]) >= 15):
+            for i in range(50, len(list_of_content) - 200):
+                if len(list_of_content[i]) >= 15:
                     list_of_keys.append(list_of_content[i])
     except:
-        os.remove()
+        pass
     return list_of_keys
 
-#form Q
-def Q(parts):
+
+# form Q
+def generateQ(parts):
     str = ""
     for part in parts:
-        #print(part)
+        # print(part)
         str += part
-    return str
+    flt = Filter(str)
+    res = flt.filter()
+    return res
+
 
 def read_all(in_directory, out_directory, key_directory):
     for filename in os.listdir(in_directory):
         f = os.path.join(in_directory, filename)
-        ret = []
         name = filename.split('.')[0]
         try:
             if os.path.isfile(f):
-                ret = ret + Q(key_parts(f))
-            print(ret)
-            for i in range(len(ret)):
+                ret = generateQ(key_parts(f))
                 txt_name = os.path.join(out_directory, f'{name}.txt')
                 print(f'OUT: {txt_name}')
-                
-                txt = open(txt_name,"w")
-                txt.write(ret[i])
-                txt.close()
+                with open(txt_name, "w") as txt:
+                    txt.write(ret)
+                    txt.close()
         except:
             try:
-                os.remove(key_directory+name+'.pdf.txt')
+                os.remove(key_directory + name + '.pdf.txt')
             except FileNotFoundError:
                 pass
 
+
 if __name__ == '__main__':
-    #read_all("/Users/donglianghan/Desktop/NLP_for_NASA/pdfs","/Users/donglianghan/Desktop/NLP_for_NASA/raw_data/q"
-    read_all( "./pdf_pool","./seq2seq/raw_data/q", "./seq2seq/rawdata/a/")
+    # read_all("/Users/donglianghan/Desktop/NLP_for_NASA/pdfs","/Users/donglianghan/Desktop/NLP_for_NASA/raw_data/q"
+    read_all("./pdf_pool", "./seq2seq/rawdata/q", "./seq2seq/rawdata/a/")
