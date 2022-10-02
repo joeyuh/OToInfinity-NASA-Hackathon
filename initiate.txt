@@ -1,0 +1,20 @@
+ssh featurize@workspace.featurize.cn -p 28095
+8f858cc9
+
+scp -r /Users/donglianghan/Desktop/seq2seq  compute@192.168.100.21:~/
+
+
+conda activate tf_gpu_1.4.1
+cd work/NASA/seq2seq
+
+
+
+(make_data):
+    t2t-datagen --t2t_usr_dir=self_script --problem=my_problem --data_dir=./self_data
+
+
+(train):
+    t2t-trainer --t2t_usr_dir=self_script --problem=my_problem --data_dir=./self_data --model=lstm_seq2seq_attention --hparams_set=lstm_attention --output_dir=./train
+
+(forecast):
+    t2t-decoder --t2t_usr_dir=self_script --problem=my_problem --data_dir=./self_data --model=lstm_seq2seq_attention --hparams_set=lstm_attention --output_dir=./train --decode_hparams="beam_size=4,alpha=0.6" --decode_from_file=decoder/q.txt --decode_to_file=decoder/a.txt
