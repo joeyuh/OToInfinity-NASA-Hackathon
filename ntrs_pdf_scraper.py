@@ -9,7 +9,7 @@ counter = 0
 
 def download(url):
     if check_file_size(url) <= SIZE_LIMIT:
-        urllib.request.urlretrieve(url, url.split('/')[-1])
+        urllib.request.urlretrieve(url, "./dataset/" + url.split('/')[-1])
 
 
 def check_file_size(url):
@@ -46,6 +46,7 @@ if __name__ == '__main__':
         }
         res = json_post('https://ntrs.nasa.gov/api/citations/search', search_term)
         res = res['results']
+        print(page)
 
         for i in res:
             if 'keywords' not in i:
@@ -56,7 +57,7 @@ if __name__ == '__main__':
                     if 'pdf' in d['links']:
                         link = 'https://ntrs.nasa.gov' + d['links']['pdf']
                         downloads.add(link)
-                        with open(f'{link.split("/")[-1]}.txt', 'w') as f:
+                        with open(f'./dataset/{link.split("/")[-1]}.txt', 'w') as f:
                             for k in i['keywords']:
                                 f.write(f'{k},')
 
