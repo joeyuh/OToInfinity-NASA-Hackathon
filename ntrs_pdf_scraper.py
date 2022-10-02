@@ -29,8 +29,8 @@ def json_post(url, json_dictionary):
 if __name__ == '__main__':
     downloads = set()
     print("Enter Download Query Range")
-    a = input()
-    b = input()
+    a = int(input())
+    b = int(input())
     for page in range(a,b):
         search_term = {
             "disseminated": "DOCUMENT_AND_METADATA",

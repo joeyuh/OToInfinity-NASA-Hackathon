@@ -1,4 +1,5 @@
 # coding=utf-8
+import os
 from tensor2tensor.utils import registry
 from tensor2tensor.data_generators import problem, text_problems
 
