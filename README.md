@@ -6,4 +6,4 @@ https://2022.spaceappschallenge.org/challenges/2022-challenges/science-legacy/te
 Global Nominee
 
 ## Team Member
-Sarah Wilson, Lianghan Dong, Hanjiang Yu
+Sarah Wilson, Lianghan Dong, Joe Yu
